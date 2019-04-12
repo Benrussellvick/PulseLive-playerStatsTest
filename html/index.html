@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>PulseLive test</title>
+    <meta name="author" content="Ben Russell-Vick" />
+    <meta name="description" content="Creative Developer" />
+    <meta name="keywords" content="" />
+    <meta name="Resource-type" content="Document" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/images/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/images/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/images/favicon/favicon-16x16.png"
+    />
+    <!-- <link rel="manifest" href="/images/favicon/site.webmanifest"> -->
+    <link
+      rel="mask-icon"
+      href="/images/favicon/safari-pinned-tab.svg"
+      color="#5bbad5"
+    />
+    <link rel="shortcut icon" href="/images/favicon/favicon.ico" />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <!-- <meta name="msapplication-config" content="/images/favicon/browserconfig.xml"> -->
+    <meta name="theme-color" content="#ffffff" />
+
+    <!--build:css css/main.min.css-->
+    <link rel="stylesheet" href="css/main.css" />
+    <!--endbuild-->
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="form-group">
+          <div class="custom-select">
+            <select class="form-control" id="sel" onchange="show(this)">
+              <option value="">Select a player...</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div id="player-profile">
+          <img id="player__img" src="" alt="player image" />
+          <div class="player__info">
+            <div id="player__name"></div>
+            <div id="player__pos"></div>
+            <div id="player__club"></div>
+            <ul class="list-group player__stats" id="player__stats">
+              <!-- <li class="list-group-item player__apps" id="player__apps">
+                Appearances<span></span>
+              </li>
+              <li class="list-group-item player__goals" id="player__goals">
+                Goals<span></span>
+              </li>
+              <li
+                class="list-group-item player__assists"
+                id="player__assists"
+                data-assists="goal_assist"
+              >
+                Assists<span></span>
+              </li>
+              <li class="list-group-item player__wins" id="player__wins">
+                Wins<span></span>
+              </li>
+              <li class="list-group-item player__mp" id="player__mp">
+                Minutes played<span></span>
+              </li> -->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.container -->
+
+    <!--build:js js/global.min.js -->
+    <script type="text/javascript" src="js/global.js"></script>
+    <!-- endbuild -->
+  </body>
+</html>

@@ -1,0 +1,80 @@
+#player-profile {
+    width: 100%;
+    background: url(../images/background.png) top right no-repeat;
+    opacity: 0;
+    transition: opacity 0.4s ease-in;
+
+    &.js-show {
+        opacity: 1;
+    }
+
+    #player__img {
+        padding: 0 8px;
+    }
+
+    .player__info {
+        background: $brand-red;
+        position: relative;
+        @include padding;
+        color: $white;
+
+        #player__name {
+            font-size: 1.5rem;
+            margin-bottom: 0.4rem;
+        }
+
+        #player__club {
+            position: absolute;
+            right: 20px;
+            top: -50px;
+            // height: 110px;
+            // width: 110px;
+            border: 5px solid white;
+            border-radius: 100%;
+            background: $white;
+
+            span {
+                border-radius: 100%;
+                display: block;
+                height: 100px;
+                width: 100px;
+            }
+
+            .manchester-united {
+                background-image: url(../images/badges_sprite.png);
+                background-position: 600px 300px;
+            }
+
+            .manchester-city {
+                background-image: url(../images/badges_sprite.png);
+                background-position: 400px 400px;
+            }
+
+            .tottenham-hotspur {
+                background-image: url(../images/badges_sprite.png);
+                background-position: 700px 1200px;
+            }
+
+            .arsenal {
+                background-image: url(../images/badges_sprite.png);
+                background-position: 1100px 1000px;
+            }
+
+            .leicester-city {
+                background-image: url(../images/badges_sprite.png);
+                background-position: 0px 0px;
+            }
+        }
+    }
+
+    .player__stats {
+        margin-top: 20px;
+        color: $brand-purple;
+
+        span {
+            font-size: 1.1rem;
+            float: right;
+            font-weight: bold;
+        }
+    }
+}
