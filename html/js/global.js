@@ -39,7 +39,24 @@ function populateSelect() {
   xhrequest.send();
 }
 
-function playerStats() {}
+function statTextRename() {
+  let fwdPass = document.getElementsByClassName("fwd_pass");
+  for (var k = 0; k < fwdPass.length; k++) {
+    fwdPass[k].firstElementChild.innerText = "forward passes";
+  }
+  let goalAssist = document.getElementsByClassName("goal_assist");
+  for (var k = 0; k < goalAssist.length; k++) {
+    goalAssist[k].firstElementChild.innerText = "Assists";
+  }
+  let minsPlayed = document.getElementsByClassName("mins_played");
+  for (var k = 0; k < minsPlayed.length; k++) {
+    minsPlayed[k].firstElementChild.innerText = "Minutes played";
+  }
+  let backwardPass = document.getElementsByClassName("backward_pass");
+  for (var k = 0; k < backwardPass.length; k++) {
+    backwardPass[k].firstElementChild.innerText = "Backward passes";
+  }
+}
 
 function show(ele) {
   const dataSource = JSON.parse(localStorage.getItem("dataSource"));
@@ -82,13 +99,22 @@ function show(ele) {
         var itemTxt = document.createTextNode(itemReplace);
         var figureTxt = document.createTextNode(figure);
         var li = document.createElement("li");
-        var span = document.createElement("span");
+        var spanStat = document.createElement("span");
+        var spanText = document.createElement("span");
 
-        li.appendChild(itemTxt);
-        li.appendChild(span);
-        span.appendChild(figureTxt);
+        li.appendChild(spanText);
+        spanText.setAttribute("class", "stat");
+        spanText.appendChild(itemTxt);
+        //
+        li.appendChild(spanStat);
+        spanStat.setAttribute("class", "stat-figure");
+        spanStat.appendChild(figureTxt);
 
         playerStats.appendChild(li).classList.add(correctStats.stats[j].name);
+
+        // Replace
+        statTextRename();
+        // ------
       }
     }
   }

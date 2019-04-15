@@ -148,7 +148,7 @@ select {
   #player-profile .player__stats {
     margin-top: 20px;
     color: #38003c; }
-    #player-profile .player__stats span {
+    #player-profile .player__stats .stat-figure {
       font-size: 1.1rem;
       float: right;
       font-weight: bold; }
