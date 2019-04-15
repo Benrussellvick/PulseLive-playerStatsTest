@@ -39,6 +39,8 @@ function populateSelect() {
   xhrequest.send();
 }
 
+function playerStats() {}
+
 function show(ele) {
   const dataSource = JSON.parse(localStorage.getItem("dataSource"));
 
@@ -86,7 +88,7 @@ function show(ele) {
         li.appendChild(span);
         span.appendChild(figureTxt);
 
-        playerStats.appendChild(li);
+        playerStats.appendChild(li).classList.add(correctStats.stats[j].name);
       }
     }
   }
