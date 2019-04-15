@@ -1,7 +1,10 @@
 const xhrequest = new XMLHttpRequest(),
   method = "GET",
   overrideMimeType = "application/json",
-  url = "../player-stats.json";
+  url = "../player-stats.json",
+  dataSource = JSON.parse(localStorage.getItem("dataSource"));
+// Player stats var
+var playerStats = document.getElementById("player__stats");
 
 // Populate dropdown on load
 window.onload = populateSelect();
@@ -15,11 +18,9 @@ function populateSelect() {
     ) {
       const ele = document.getElementById("sel");
       const dataSource = JSON.parse(xhrequest.responseText);
-
       // Set LocalStorage
       localStorage.setItem("dataSource", JSON.stringify(dataSource));
       // ----------------
-
       for (let i = 0; i < dataSource.players.length; i++) {
         ele.innerHTML =
           ele.innerHTML +
@@ -33,9 +34,7 @@ function populateSelect() {
       }
     }
   };
-
   xhrequest.open(method, url, true);
-
   xhrequest.send();
 }
 
@@ -58,64 +57,58 @@ function statTextRename() {
   }
 }
 
-function show(ele) {
-  const dataSource = JSON.parse(localStorage.getItem("dataSource"));
-
+function playerInfoFunc(i, ele) {
   // player info var
   var playerName = document.getElementById("player__name");
   var playerPos = document.getElementById("player__pos");
   var playerClub = document.getElementById("player__club");
   var playerImg = document.getElementById("player__img");
+  const correctPlayer = dataSource.players[i].player;
+  // Player info
+  playerName.innerText = ele.options[ele.selectedIndex].text;
+  playerPos.innerText = correctPlayer.info.positionInfo.split(" ").slice(-1);
 
-  // Player stats var
-  var playerStats = document.getElementById("player__stats");
+  var myStr = correctPlayer.currentTeam.name;
+  var newStr = myStr.replace(" ", "-").toLowerCase();
+  playerClub.innerHTML = "<span class='" + newStr + "'></span>";
+  playerImg.src = "images/p" + ele.value + ".png";
+  playerStats.innerHTML = "";
+}
 
+function playerStatsFunc(i) {
+  const correctStats = dataSource.players[i];
+  // Player stats
+  for (let j = 0; j < correctStats.stats.length; j++) {
+    var itemReplace = correctStats.stats[j].name.replace("_", " ");
+    var figure = correctStats.stats[j].value;
+    var itemTxt = document.createTextNode(itemReplace);
+    var figureTxt = document.createTextNode(figure);
+    var li = document.createElement("li");
+    var spanStat = document.createElement("span");
+    var spanText = document.createElement("span");
+
+    li.appendChild(spanText);
+    spanText.setAttribute("class", "stat");
+    spanText.appendChild(itemTxt);
+    //
+    li.appendChild(spanStat);
+    spanStat.setAttribute("class", "stat-figure");
+    spanStat.appendChild(figureTxt);
+    playerStats.appendChild(li).classList.add(correctStats.stats[j].name);
+    // Replace
+    statTextRename();
+    // ------
+  }
+}
+
+function show(ele) {
   for (let i = 0; i < dataSource.players.length; i++) {
     if (dataSource.players[i].player.id == ele.value) {
       document.getElementById("player-profile").classList.add("js-show");
 
-      const correctPlayer = dataSource.players[i].player;
-      const correctStats = dataSource.players[i];
+      playerInfoFunc(i, ele);
 
-      // Player info
-      playerName.innerText = ele.options[ele.selectedIndex].text;
-
-      playerPos.innerText = correctPlayer.info.positionInfo
-        .split(" ")
-        .slice(-1);
-
-      var myStr = correctPlayer.currentTeam.name;
-      var newStr = myStr.replace(" ", "-").toLowerCase();
-      playerClub.innerHTML = "<span class='" + newStr + "'></span>";
-
-      playerImg.src = "images/p" + ele.value + ".png";
-      playerStats.innerHTML = "";
-
-      // Player stats
-      for (let j = 0; j < correctStats.stats.length; j++) {
-        var item = correctStats.stats[j].name;
-        var itemReplace = item.replace("_", " ");
-        var figure = correctStats.stats[j].value;
-        var itemTxt = document.createTextNode(itemReplace);
-        var figureTxt = document.createTextNode(figure);
-        var li = document.createElement("li");
-        var spanStat = document.createElement("span");
-        var spanText = document.createElement("span");
-
-        li.appendChild(spanText);
-        spanText.setAttribute("class", "stat");
-        spanText.appendChild(itemTxt);
-        //
-        li.appendChild(spanStat);
-        spanStat.setAttribute("class", "stat-figure");
-        spanStat.appendChild(figureTxt);
-
-        playerStats.appendChild(li).classList.add(correctStats.stats[j].name);
-
-        // Replace
-        statTextRename();
-        // ------
-      }
+      playerStatsFunc(i);
     }
   }
 }
